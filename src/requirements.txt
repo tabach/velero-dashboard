@@ -3,3 +3,4 @@ flask_oidc
 requests
 urllib3
 bjoern
+itsdangerous==2.0.1
