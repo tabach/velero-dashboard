@@ -8,13 +8,13 @@ RUN apk update && \
     apk add npm && \
     npm install -g uglifycss uglify-es && \
     chown -R root: * && \
-    find ./oauth2/static/js/ -type f \
+    find . -type f \
         -name "*.js" ! -name "*.min.*" ! -name "vfs_fonts*" \
         -exec echo {} \; \
         -exec uglifyjs -c -o {}.min {} \; \
         -exec rm {} \; \
         -exec mv {}.min {} \; && \
-    find ./oauth2/static/css/ -type f \
+    find . -type f \
         -name "*.css" ! -name "*.min.*" \
         -exec echo {} \; \
         -exec uglifycss --output {}.min {} \; \
@@ -43,6 +43,7 @@ RUN adduser \
     "app"
 
 COPY ./src/requirements.txt /app/requirements.txt
+COPY ./src/velero-v1.9.1 /usr/local/bin/velero
 
 RUN pip install -r /app/requirements.txt
 
